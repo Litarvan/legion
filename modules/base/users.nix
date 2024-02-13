@@ -18,6 +18,7 @@
   programs = {
     fish.enable = true;
     starship.enable = true;
+    command-not-found.enable = false;
   };
 
   home-manager = {
@@ -34,7 +35,7 @@
 
       programs = {
         home-manager.enable = true;
-        command-not-found.enable = true;
+        # command-not-found.enable = true;
 
         fish = {
           enable = true;

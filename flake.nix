@@ -10,9 +10,13 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgsUnstable, flake-utils, home-manager } @ inputs:
+  outputs = { self, nixpkgs, nixpkgsUnstable, flake-utils, home-manager, ... } @ inputs:
     let
       inherit (nixpkgs) lib;
 

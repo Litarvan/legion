@@ -2,8 +2,11 @@
 
 let
   modules = [
-    ./alacritty.nix
     ./home.nix
+
+    ./alacritty.nix
+    ./i3.nix
+    ./picom.nix
   ];
 in
 {

@@ -12,7 +12,10 @@ let
 
       modules = [
         path
+
         inputs.home-manager.nixosModules.home-manager
+        inputs.nix-index-database.nixosModules.nix-index
+
         {
           nix = {
             nixPath = (mapAttrsToList (name: input: "${name}=${input}") inputs) ++ [ "nixos=${inputs.nixpkgs}" ];
