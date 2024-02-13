@@ -16,14 +16,14 @@
           lines = 40;
           columns = 125;
         };
+
+        opacity = 0.75;
       };
 
       font = {
         normal.family = "Meslo LG S for Powerline";
         size = 10.0;
       };
-
-      background_opacity = 0.75;
 
       colors = {
         primary = {

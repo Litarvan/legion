@@ -10,15 +10,24 @@
     jetbrains.clion
   ]);
 
-  programs.git = {
-    enable = true;
+  programs = {
+    firefox.enable = true;
 
-    userName = "Adrien Navratil";
-    userEmail = "adrien1975" + "@" + "live.fr";
+    gpg = {
+      enable = true;
+      publicKeys = [ { source = ./litarvan.pub.gpg; } ];
+    };
 
-    signing = {
-      key = "056C26AAB0E33515";
-      signByDefault = true;
+    git = {
+      enable = true;
+
+      userName = "Adrien Navratil";
+      userEmail = "adrien1975" + "@" + "live.fr";
+
+      signing = {
+        key = "056C26AAB0E33515";
+        signByDefault = true;
+      };
     };
   };
   
