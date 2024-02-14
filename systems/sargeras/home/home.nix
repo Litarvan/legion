@@ -5,7 +5,7 @@
     htop zip unzip file lz4 patchelf unrar findutils imagemagick p7zip
     rustup
     powerline-fonts noto-fonts-emoji jetbrains-mono
-    discord krita spectacle
+    discord slack spotify krita spectacle
   ]) ++ (with pkgsUnstable; [
     jetbrains.clion
   ]);

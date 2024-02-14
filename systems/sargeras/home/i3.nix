@@ -28,21 +28,24 @@
       focus.newWindow = "none";
     
       keybindings = lib.mkOptionDefault {
-        "${modifier}+Return" = null;
+        # Handled with KDE since for some reason running alacritty like this alongside the i3 systemd service will destroy the shell environment, making it nearly unusable
         # "${modifier}+Shift+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
-        "${modifier}+Shift+Return" = null;
-        "${modifier}+Shift+s" = "exec ${pkgs.spectacle}/bin/spectacle -r";
+        "${modifier}+Return" = null;
+        "${modifier}+Shift+s" = "exec ${lib.getExe' pkgs.spectacle "spectacle"} -r";
       };
 		
       startup = [
         {
-          command = "${pkgs.feh}/bin/feh --bg-scale ${./wallpaper.png}";
+          command = "${lib.getExe pkgs.feh} --bg-scale ${./wallpaper.png}";
           always = true;
           notification = false;
         }
-
         {
-          command = "${pkgs.numlockx}/bin/numlockx";
+          command = lib.getExe pkgs.numlockx;
+          always = true;
+        }
+        {
+          command = "${lib.getExe pkgs.xorg.xmodmap} -e 'keycode 49 = less greater'";
           always = true;
         }
       ];
