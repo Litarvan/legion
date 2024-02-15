@@ -3,15 +3,25 @@
 {
   home.packages = (with pkgs; [
     htop zip unzip file lz4 patchelf unrar findutils imagemagick p7zip
-    rustup
     powerline-fonts noto-fonts-emoji jetbrains-mono
     discord slack spotify krita spectacle
   ]) ++ (with pkgsUnstable; [
-    jetbrains.clion
+    jetbrains.clion jetbrains.datagrip
   ]);
 
   programs = {
     firefox.enable = true;
+
+    fish = {
+      functions.cdr = ''cd "$HOME/stockly/Main/$argv"'';
+      shellInit = ''
+        complete --no-files --exclusive --command cdr --arguments "(pushd $HOME/stockly/Main; __fish_complete_directories; popd)"
+      '';
+    };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
 
     gpg = {
       enable = true;

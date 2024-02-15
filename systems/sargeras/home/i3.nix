@@ -25,7 +25,10 @@
         outer = 15;
       };
 
-      focus.newWindow = "none";
+      focus = {
+        newWindow = "none";
+        mouseWarping = false;
+      };
     
       keybindings = lib.mkOptionDefault {
         # Handled with KDE since for some reason running alacritty like this alongside the i3 systemd service will destroy the shell environment, making it nearly unusable
