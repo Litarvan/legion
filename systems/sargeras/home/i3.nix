@@ -4,7 +4,7 @@
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
-  
+
     config = rec {
       modifier = "Mod4";
       bars = [
@@ -17,9 +17,18 @@
           };
         }
       ];
-		
-      window.border = 0;
-		
+
+      window = {
+        border = 0;
+        commands = [
+          # Kills the wallpaper windows popping on startup
+          {
+            criteria.title = "Desktop @ QRect.*";
+            command = "kill; floating enable; border none";
+          }
+        ];
+      };
+
       gaps = {
         inner = 15;
         outer = 15;
@@ -29,14 +38,18 @@
         newWindow = "none";
         mouseWarping = false;
       };
-    
+
       keybindings = lib.mkOptionDefault {
+        "${modifier}+Return" = null;
+        "${modifier}+d" = null;
+
         # Handled with KDE since for some reason running alacritty like this alongside the i3 systemd service will destroy the shell environment, making it nearly unusable
         # "${modifier}+Shift+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
-        "${modifier}+Return" = null;
+
         "${modifier}+Shift+s" = "exec ${lib.getExe' pkgs.spectacle "spectacle"} -r";
+        "${modifier}+Shift+e" = "exec ${lib.getExe' pkgs.qt5.qttools "qdbus"} org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1";
       };
-		
+
       startup = [
         {
           command = "${lib.getExe pkgs.feh} --bg-scale ${./wallpaper.png}";

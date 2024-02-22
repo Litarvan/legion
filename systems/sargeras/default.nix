@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -25,8 +25,16 @@
       };
     };
   };
-  
-  hardware.cpu.intel.updateMicrocode = true;
+
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    pulseaudio.package = pkgs.pulseaudioFull;
+  };
 
   fileSystems = {
     "/" = {
@@ -48,6 +56,8 @@
   services = {
     fstrim.enable = true;
     thermald.enable = true;
+
+    postgresql.enable = true;
   };
 
   virtualisation.docker.enable = true;
