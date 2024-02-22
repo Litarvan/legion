@@ -29,6 +29,35 @@
         ];
       };
 
+      workspaceOutputAssign = [
+        {
+          workspace = "1";
+          output = "eDP-1";
+        }
+        {
+          workspace = "2";
+          output = "eDP-1";
+        }
+        {
+          workspace = "3";
+          output = "eDP-1";
+        }
+        {
+          workspace = "4";
+          output = "eDP-1";
+        }
+
+        {
+          workspace = "5";
+          output = "HDMI-1";
+        }
+
+        {
+          workspace = "6";
+          output = "eDP-1";
+        }
+      ];
+
       gaps = {
         inner = 15;
         outer = 15;
