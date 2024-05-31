@@ -15,7 +15,7 @@
         allowDiscards = true;
       };
     };
-    kernelModules = [ "kvm-intel" "dm-mod" "dm-crypt" ];
+    kernelModules = [ "kvm-intel" "dm-mod" "dm-crypt" "hid-apple" ];
 
     loader = {
       systemd-boot.enable = true;
@@ -33,7 +33,6 @@
       enable = true;
       powerOnBoot = true;
     };
-    pulseaudio.package = pkgs.pulseaudioFull;
   };
 
   fileSystems = {

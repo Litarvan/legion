@@ -32,29 +32,29 @@
       workspaceOutputAssign = [
         {
           workspace = "1";
-          output = "eDP-1";
+          output = "HDMI-1";
         }
         {
           workspace = "2";
-          output = "eDP-1";
+          output = "HDMI-1";
         }
         {
           workspace = "3";
-          output = "eDP-1";
+          output = "HDMI-1";
         }
         {
           workspace = "4";
-          output = "eDP-1";
-        }
-
-        {
-          workspace = "5";
           output = "HDMI-1";
         }
 
         {
-          workspace = "6";
+          workspace = "5";
           output = "eDP-1";
+        }
+
+        {
+          workspace = "6";
+          output = "HDMI-1";
         }
       ];
 
@@ -89,10 +89,10 @@
           command = lib.getExe pkgs.numlockx;
           always = true;
         }
-        {
-          command = "${lib.getExe pkgs.xorg.xmodmap} -e 'keycode 49 = less greater'";
-          always = true;
-        }
+        #{
+        #  command = "${lib.getExe pkgs.xorg.xmodmap} -e 'keycode 49 = less greater'";
+        #  always = true;
+        #}
       ];
     };
   };
