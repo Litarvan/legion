@@ -1,4 +1,4 @@
-{ inputs, pkgsSets, ... }:
+{ inputs, pkgsSets, root, ... }:
 
 let
   inherit (inputs.nixpkgs) lib;
@@ -31,9 +31,10 @@ let
             overlays = attrValues inputs.self.overlays;
           };
         }
-      ] ++ (flattenModules inputs.self.nixosModules);
+      ] ++ (flattenModules inputs.self.nixosModules)
+        ++ (lib.legion.homeModules (flattenModules inputs.self.homeManagerModules));
 
-      specialArgs = mapAttrs (_: set: set.${system}) pkgsSets;
+      specialArgs = { inherit root; } // (mapAttrs (_: set: set.${system}) pkgsSets);
     };
 in
 {

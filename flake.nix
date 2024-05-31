@@ -1,4 +1,4 @@
-{
+home{
   description = "Litarvan's desktops configuration";
 
   inputs = {
@@ -18,7 +18,7 @@
 
   outputs = { self, nixpkgs, nixpkgsUnstable, flake-utils, home-manager, ... } @ inputs:
     let
-      inherit (nixpkgs) lib;
+      lib = nixpkgs.lib // { legion = import ./lib; };
 
       makePackageSet = pkgsInput: builtins.listToAttrs (map (system: {
         name = system;
@@ -39,12 +39,24 @@
         pkgs = pkgsSets.pkgs.${system};
       in
       {
+        # System-specific outputs
+
         packages = import ./pkgs { inherit lib pkgs; };
       }
     )) // {
+      # Non-system-specific outputs
+
+      lib = lib.legion;
+
       overlays = import ./pkgs/overlays.nix { inherit lib; };
 
       nixosModules = import ./modules;
-      nixosConfigurations = import ./systems { inherit inputs pkgsSets; };
+      nixosConfigurations = import ./systems {
+        inherit inputs pkgsSets;
+        root = ./;
+      };
+
+      homeManagerModules = import ./homeModules;
+      # TODO: Home configurations
     };
 }

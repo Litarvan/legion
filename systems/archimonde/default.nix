@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
-    # ./home
+    (lib.legion.homeModules [
+      ./home
+    ])
   ];
 
   legion = {

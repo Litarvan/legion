@@ -1,0 +1,3 @@
+{
+  homeManagerModules = import ./homeModules.nix;
+}

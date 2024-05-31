@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, root, ... }:
 
 {
   users.users = {
@@ -11,9 +11,7 @@
         ++ lib.optionals (config.virtualisation.virtualbox.host.enable) [ "vboxusers" ]
         ++ lib.optionals (config.virtualisation.docker.enable) [ "docker" ];
       shell = pkgs.fish;
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoFiziKbq1TVgaiSp4SioutOG78WSkbJrrIYrKEYM5H cardno:16 097 343"
-      ];
+      openssh.authorizedKeys.keys = [ (builtins.readFile (root + /statics/litarvan.ed25519.pub.ssh)) ];
     };
   };
 
