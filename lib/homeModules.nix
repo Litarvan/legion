@@ -4,8 +4,8 @@ modules:
 
 {
   imports = map
-    (path: {
-      home-manager.users.litarvan = import path args;
+    (module: {
+      home-manager.users.litarvan = module args;
     })
     modules;
 }

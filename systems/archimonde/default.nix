@@ -3,7 +3,8 @@
 {
   imports = [
     (lib.legion.homeModules [
-      ./home
+      # TODO: Improve
+      (import ./home.nix)
     ])
   ];
 

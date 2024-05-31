@@ -1,3 +1,3 @@
 {
-  homeManagerModules = import ./homeModules.nix;
+  homeModules = import ./homeModules.nix;
 }

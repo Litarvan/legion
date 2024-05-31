@@ -1,8 +1,6 @@
-{ inputs, pkgsSets, root, ... }:
+{ inputs, lib, pkgsSets, root, ... }:
 
 let
-  inherit (inputs.nixpkgs) lib;
-
   flattenModules = modules:
     builtins.concatMap
       (value: if (builtins.typeOf value) == "set" then flattenModules value else [ value ])
@@ -21,6 +19,8 @@ let
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
 
+        (lib.legion.homeModules (flattenModules inputs.self.homeManagerModules))
+
         {
           nix = {
             nixPath = (mapAttrsToList (name: input: "${name}=${input}") inputs) ++ [ "nixos=${inputs.nixpkgs}" ];
@@ -31,10 +31,9 @@ let
             overlays = attrValues inputs.self.overlays;
           };
         }
-      ] ++ (flattenModules inputs.self.nixosModules)
-      ++ (lib.legion.homeModules (flattenModules inputs.self.homeManagerModules));
+      ] ++ (flattenModules inputs.self.nixosModules);
 
-      specialArgs = { inherit root; } // (mapAttrs (_: set: set.${system}) pkgsSets);
+      specialArgs = { inherit root lib; } // (mapAttrs (_: set: set.${system}) pkgsSets);
     };
 in
 {

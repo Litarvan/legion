@@ -3,7 +3,8 @@
 {
   imports = [
     (lib.legion.homeModules [
-      ./home
+      # TODO: Improve
+      (import ./home.nix)
     ])
   ];
 
@@ -46,5 +47,6 @@
   virtualisation.docker.enable = true;
 
   nix.settings.max-jobs = 12;
+
   system.stateVersion = "23.11";
 }

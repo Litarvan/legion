@@ -1,4 +1,4 @@
-home {
+{
   description = "Litarvan's desktops configuration";
 
   inputs = {
@@ -54,7 +54,7 @@ home {
 
       nixosModules = import ./modules;
       nixosConfigurations = import ./systems {
-        inherit inputs pkgsSets;
+        inherit inputs lib pkgsSets;
         root = ./.;
       };
 

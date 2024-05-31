@@ -59,9 +59,9 @@
 
       startup = [
         {
-          command = builtins.concatStringSep
+          command = builtins.concatStringsSep
             " "
-            [ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-scale ${path}") config.legion.wallpapers);
+            ([ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-scale ${path}") config.home-manager.users.litarvan.legion.wallpapers)); # TODO: X D
           always = true;
           notification = false;
         }

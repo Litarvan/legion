@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ root, pkgs, ... }:
 
 {
   legion.wallpapers = [
