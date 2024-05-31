@@ -38,7 +38,7 @@
       before = [ "plasma-workspace.target" ];
       serviceConfig = {
         ExecStart = pkgs.lib.getExe' pkgs.i3-gaps "i3";
-        Restart = "on-failure"; 
+        Restart = "on-failure";
       };
     };
 

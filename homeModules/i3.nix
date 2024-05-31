@@ -61,7 +61,7 @@
         {
           command = builtins.concatStringSep
             " "
-            [ "${lib.getExe pkgs.feh} "] ++ (map (path: "--bg-scale ${path}") config.legion.wallpapers);
+            [ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-scale ${path}") config.legion.wallpapers);
           always = true;
           notification = false;
         }

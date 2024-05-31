@@ -32,7 +32,7 @@ let
           };
         }
       ] ++ (flattenModules inputs.self.nixosModules)
-        ++ (lib.legion.homeModules (flattenModules inputs.self.homeManagerModules));
+      ++ (lib.legion.homeModules (flattenModules inputs.self.homeManagerModules));
 
       specialArgs = { inherit root; } // (mapAttrs (_: set: set.${system}) pkgsSets);
     };

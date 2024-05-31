@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
     # TODO: Should we keep it?
-    arc-kde-theme papirus-icon-theme
+    arc-kde-theme
+    papirus-icon-theme
   ];
 }
