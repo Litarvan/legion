@@ -5,9 +5,16 @@
     ./home
   ];
 
+  legion = {
+    cpu.intel.enable = true;
+    nvme.enable = true;
+    bluetooth.enable = true;
+    touchpad.enable = true;
+  };
+
   boot = {
     initrd = {
-      availableKernelModules = [ "vmd" "xhci_pci" "nvme" ];
+      availableKernelModules = [ "xhci_pci" ];
 
       luks.devices.sargeras_crypt = {
         device = "/dev/disk/by-label/sargeras_crypt";
@@ -15,24 +22,8 @@
         allowDiscards = true;
       };
     };
-    kernelModules = [ "kvm-intel" "dm-mod" "dm-crypt" "hid-apple" ];
 
-    loader = {
-      systemd-boot.enable = true;
-      efi = {
-        efiSysMountPoint = "/efi";
-        canTouchEfiVariables = true;
-      };
-    };
-  };
-
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
+    kernelModules = [ "dm-mod" "dm-crypt" "hid-apple" ];
   };
 
   fileSystems = {
@@ -47,21 +38,11 @@
     };
   };
 
-  networking = {
-    hostName = "sargeras";
-    networkmanager.enable = true;
-  };
+  networking.hostName = "sargeras";
 
-  services = {
-    fstrim.enable = true;
-    thermald.enable = true;
-
-    postgresql.enable = true;
-  };
-
+  services.postgresql.enable = true;
   virtualisation.docker.enable = true;
 
   nix.settings.max-jobs = 12;
-
   system.stateVersion = "23.11";
 }

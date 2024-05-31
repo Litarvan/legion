@@ -1,22 +1,16 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.dconf.enable = true;
+  hardware.opengl = {
+    driSupport = true;
+    driSupport32Bit = true;
+  };
 
   services = {
     printing.enable = true;
 
     xserver = {
       enable = true;
-
-      libinput = {
-        enable = true;
-
-        touchpad = {
-          disableWhileTyping = true;
-          tappingButtonMap = "lrm";
-        };
-      };
 
       xkb = {
         layout = "fr";
@@ -35,16 +29,7 @@
     };
   };
 
-  environment.etc = {
-    "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
-      bluez_monitor.properties = {
-        ["bluez5.enable-sbc-xq"] = true,
-        ["bluez5.enable-msbc"] = true,
-        ["bluez5.enable-hw-volume"] = true,
-        ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-      }
-    '';
-  };
+  programs.dconf.enable = true;
 
   systemd.user.services = {
     i3 = {
@@ -64,6 +49,4 @@
       };
     };
   };
-
-  security.rtkit.enable = true;
 }

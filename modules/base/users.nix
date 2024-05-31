@@ -7,7 +7,9 @@
     litarvan = {
       description = "Adrien Navratil";
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" ]
+        ++ lib.optionals (config.virtualisation.virtualbox.host.enable) [ "vboxusers" ]
+        ++ lib.optionals (config.virtualisation.docker.enable) [ "docker" ];
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoFiziKbq1TVgaiSp4SioutOG78WSkbJrrIYrKEYM5H cardno:16 097 343"
@@ -35,7 +37,6 @@
 
       programs = {
         home-manager.enable = true;
-        # command-not-found.enable = true;
 
         fish = {
           enable = true;

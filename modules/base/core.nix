@@ -1,13 +1,27 @@
-{ modulesPath, pkgs, ... }:
+{ lib, modulesPath, pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = [ "ntfs" ];
+
+    loader = {
+      efi = {
+        efiSysMountPoint = "/efi";
+        canTouchEfiVariables = true;
+      };
+      systemd-boot.enable = true;
+    };
+  };
+
+  hardware.enableRedistributableFirmware = true;
 
   console = {
     keyMap = "fr";
-    font = "Lat2-Terminus16";
+    font = lib.mkDefault "Lat2-Terminus16";
   };
 
+  time.timeZone = "Europe/Paris";
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -22,20 +36,24 @@
       LC_IDENTIFICATION = "fr_FR.UTF-8";
     };
   };
-  time.timeZone = "Europe/Paris";
 
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
+  networking = {
+    networkmanager.enable = true;
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+  };
 
-  security.protectKernelImage = true;
-  hardware.enableRedistributableFirmware = true;
+  security = {
+    protectKernelImage = true;
+    rtkit.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [ vim git curl ];
 
   nix = {
-    package = pkgs.nixVersions.nix_2_19;
-    settings.extra-experimental-features = [ "flakes" "nix-command" "repl-flake" ];
+    package = pkgs.nixVersions.latest;
+    settings.extra-experimental-features = [ "flakes" "nix-command" ];
   };
 }
