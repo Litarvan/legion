@@ -3,6 +3,10 @@
 {
   programs = {
     fish = {
+      shellInit = ''
+        fish_vi_key_bindings
+      '';
+
       functions = {
         fish_user_key_bindings = ''
           for mode in insert default visual
@@ -10,9 +14,7 @@
           end
         '';
       };
-      shellInit = ''
-        fish_vi_key_bindings
-      '';
+      shellAbbrs.legion-rebuild = "sudo nixos-rebuild -L --show-trace --flake ~/legion";
     };
 
     direnv = {

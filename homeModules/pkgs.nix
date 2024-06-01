@@ -22,9 +22,9 @@
 
     # Apps
     discord
+    kdePackages.spectacle
     krita
     slack
-    spectacle
     spotify
   ]) ++ (with pkgsUnstable; [
     # Apps (unstable)

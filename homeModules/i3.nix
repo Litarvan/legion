@@ -43,9 +43,19 @@
       };
 
       focus = {
-        newWindow = "none";
+        newWindow = "focus";
         mouseWarping = false;
         followMouse = false;
+      };
+
+      workspaceAutoBackAndForth = true;
+      workspaceLayout = "stacking";
+
+      assigns = {
+        "1" = [{ class = "^discord$"; }];
+        "2" = [{ class = "^firefox$"; }];
+        "3" = [{ class = "^jetbrains-idea$"; }];
+        "5" = [{ class = "^spotify$"; }];
       };
 
       keybindings = lib.mkOptionDefault {
@@ -57,8 +67,8 @@
         #
         # "${modifier}+Shift+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
 
-        "${modifier}+Shift+s" = "exec ${lib.getExe' pkgs.spectacle "spectacle"} -r";
-        "${modifier}+Shift+e" = "exec ${lib.getExe' pkgs.qt5.qttools "qdbus"} org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1";
+        "${modifier}+Shift+s" = "exec ${lib.getExe' pkgs.kdePackages.spectacle "spectacle"} -r";
+        "${modifier}+Shift+e" = "exec ${lib.getExe' pkgs.kdePackages.qttools "qdbus"} org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptShutDown";
       };
 
       startup = [

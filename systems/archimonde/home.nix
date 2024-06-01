@@ -25,32 +25,40 @@
     (root + /statics/wallpapers/wow_4.jpg)
   ];
 
-  xsession.windowManager.i3.config.workspaceOutputAssign = [
-    {
-      workspace = "1";
-      output = "DP-2";
-    }
-    {
-      workspace = "2";
-      output = "DP-1";
-    }
-    {
-      workspace = "3";
-      output = "DP-1";
-    }
-    {
-      workspace = "4";
-      output = "DP-1";
-    }
+  xsession.windowManager.i3 = {
+    config = {
+      defaultWorkspace = "2";
+      workspaceOutputAssign = [
+        {
+          workspace = "1";
+          output = "DP-2";
+        }
+        {
+          workspace = "2";
+          output = "DP-1";
+        }
+        {
+          workspace = "3";
+          output = "DP-1";
+        }
+        {
+          workspace = "4";
+          output = "DP-1";
+        }
 
-    {
-      workspace = "5";
-      output = "DP-2";
-    }
+        {
+          workspace = "5";
+          output = "DP-2";
+        }
 
-    {
-      workspace = "6";
-      output = "DP-1";
-    }
-  ];
+        {
+          workspace = "6";
+          output = "DP-1";
+        }
+      ];
+    };
+    extraConfig = ''
+      workspace 2 gaps bottom 0
+    '';
+  };
 }
