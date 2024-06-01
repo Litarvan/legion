@@ -25,7 +25,7 @@
       frame-opacity = 0.7;
       blur-background = true;
       blur-background-exclude = [ "window_type = 'dock'" "window_type = 'desktop'" ];
-      blur-method = "kawase";
+      blur-method = "dual_kawase";
       blur-strength = 8;
       alpha-step = 0.06;
       detect-client-opacity = true;

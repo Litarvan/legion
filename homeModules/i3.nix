@@ -15,7 +15,6 @@
       bars = [
         {
           position = "top";
-
           colors = {
             background = "#111111";
             focusedWorkspace = { background = "#78062a"; border = "#78062a"; text = "#ffffff"; };
@@ -35,8 +34,8 @@
       };
 
       gaps = {
-        inner = 15;
-        outer = 15;
+        inner = lib.mkDefault 6;
+        outer = lib.mkDefault 6;
       };
 
       focus = {
@@ -61,7 +60,7 @@
         {
           command = builtins.concatStringsSep
             " "
-            ([ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-scale ${path}") config.home-manager.users.litarvan.legion.wallpapers)); # TODO: X D
+            ([ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-fill ${path}") config.home-manager.users.litarvan.legion.wallpapers)); # TODO: X D
           always = true;
           notification = false;
         }

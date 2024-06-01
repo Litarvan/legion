@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.alacritty = {
@@ -9,12 +9,12 @@
         title = "Terminal";
 
         position = {
-          x = 900;
-          y = 350;
+          x = lib.mkDefault 900;
+          y = lib.mkDefault 350;
         };
         dimensions = {
-          lines = 40;
-          columns = 125;
+          lines = lib.mkDefault 40;
+          columns = lib.mkDefault 125;
         };
 
         opacity = 0.6;
@@ -22,7 +22,7 @@
 
       font = {
         normal.family = "Meslo LG S for Powerline";
-        size = 8.0;
+        size = lib.mkDefault 10.0;
       };
 
       colors = {

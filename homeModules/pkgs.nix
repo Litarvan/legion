@@ -3,28 +3,29 @@
 {
   home.packages = (with pkgs; [
     # CLIs
-    htop
-    zip
-    unzip
     file
+    findutils
+    htop
+    imagemagick
     lz4
+    nixpkgs-fmt
+    p7zip
     patchelf
     unrar
-    findutils
-    imagemagick
-    p7zip
+    unzip
+    zip
 
     # Fonts
-    powerline-fonts
-    noto-fonts-emoji
     jetbrains-mono
+    noto-fonts-emoji
+    powerline-fonts
 
     # Apps
     discord
-    slack
-    spotify
     krita
+    slack
     spectacle
+    spotify
   ]) ++ (with pkgsUnstable; [
     # Apps (unstable)
     jetbrains.clion
