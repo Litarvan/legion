@@ -28,7 +28,11 @@
           # Kills the wallpaper windows popping on startup
           {
             criteria.title = "Desktop @ QRect.*";
-            command = "kill; floating enable; border none";
+            command = "kill";
+          }
+          {
+            criteria.title = "plasmashell";
+            command = "floating enable; border none";
           }
         ];
       };
@@ -41,6 +45,7 @@
       focus = {
         newWindow = "none";
         mouseWarping = false;
+        followMouse = false;
       };
 
       keybindings = lib.mkOptionDefault {
