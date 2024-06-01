@@ -38,8 +38,11 @@
       };
 
       gaps = {
-        inner = lib.mkDefault 6;
-        outer = lib.mkDefault 6;
+        inner = lib.mkDefault 15;
+        outer = lib.mkDefault 10;
+
+        # Plasma 6 floating bar already has a transparent zone acting as bottom gaps
+        bottom = 0;
       };
 
       focus = {
@@ -75,7 +78,7 @@
         {
           command = builtins.concatStringsSep
             " "
-            ([ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-fill ${path}") config.home-manager.users.litarvan.legion.wallpapers)); # TODO: X D
+            ([ "${lib.getExe pkgs.feh} " ] ++ (map (path: "--bg-fill ${path}") config.legion.wallpapers));
           always = true;
           notification = false;
         }
@@ -85,5 +88,16 @@
         }
       ];
     };
+
+    # We want bottom gaps for workspaces without the Plasma bar
+    extraConfig =
+      let
+        i3Config = config.xsession.windowManager.i3.config;
+        mainScreen = (builtins.head (builtins.filter (assign: assign.workspace == i3Config.defaultWorkspace) i3Config.workspaceOutputAssign)).output;
+      in
+      builtins.concatStringsSep "\n"
+        (map
+          ({ workspace, ... }: "workspace ${workspace} gaps bottom ${toString i3Config.gaps.outer}")
+          (builtins.filter (assign: assign.output != mainScreen) i3Config.workspaceOutputAssign));
   };
 }

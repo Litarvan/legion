@@ -21,44 +21,32 @@
     (root + /statics/wallpapers/wow_1.png)
   ];
 
-  xsession.windowManager.i3 = {
-    config = {
-      gaps = {
-        inner = 15;
-        outer = 15;
-      };
+  xsession.windowManager.i3.config.workspaceOutputAssign = [
+    {
+      workspace = "1";
+      output = "HDMI-1";
+    }
+    {
+      workspace = "2";
+      output = "HDMI-1";
+    }
+    {
+      workspace = "3";
+      output = "HDMI-1";
+    }
+    {
+      workspace = "4";
+      output = "HDMI-1";
+    }
 
-      workspaceOutputAssign = [
-        {
-          workspace = "1";
-          output = "HDMI-1";
-        }
-        {
-          workspace = "2";
-          output = "HDMI-1";
-        }
-        {
-          workspace = "3";
-          output = "HDMI-1";
-        }
-        {
-          workspace = "4";
-          output = "HDMI-1";
-        }
+    {
+      workspace = "5";
+      output = "eDP-1";
+    }
 
-        {
-          workspace = "5";
-          output = "eDP-1";
-        }
-
-        {
-          workspace = "6";
-          output = "HDMI-1";
-        }
-      ];
-    };
-    extraConfig = ''
-      workspace 1 gaps bottom 0
-    '';
-  };
+    {
+      workspace = "6";
+      output = "HDMI-1";
+    }
+  ];
 }
