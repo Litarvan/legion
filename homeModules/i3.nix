@@ -59,7 +59,7 @@
         "1" = [{ class = "^discord$"; }];
         "2" = [{ class = "^firefox$"; }];
         "3" = [{ class = "^jetbrains-idea$"; }];
-        "5" = [{ class = "^spotify$"; }];
+        "5" = [{ class = "^spotify$"; } { class = "^jetbrains-datagrip$"; }];
       };
 
       keybindings = lib.mkOptionDefault {
