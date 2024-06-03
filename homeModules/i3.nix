@@ -51,6 +51,7 @@
         followMouse = false;
       };
 
+      defaultWorkspace = lib.mkDefault "1";
       workspaceAutoBackAndForth = true;
       workspaceLayout = "stacking";
 

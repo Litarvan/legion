@@ -26,6 +26,10 @@
     krita
     slack
     spotify
+
+    # Themes
+    arc-kde-theme
+    papirus-icon-theme
   ]) ++ (with pkgsUnstable; [
     # Apps (unstable)
     jetbrains.clion

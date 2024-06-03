@@ -1,12 +1,9 @@
 { config, root, pkgs, pkgsUnstable, ... }:
 
 {
-  home.packages = with pkgs; [
-    arc-kde-theme
-    papirus-icon-theme
-  ] ++ (with pkgsUnstable; [
+  home.packages = with pkgsUnstable; [
     jetbrains.idea-ultimate
-  ]);
+  ];
 
   programs.alacritty.settings.window = {
     position = {
