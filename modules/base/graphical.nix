@@ -16,16 +16,24 @@
         layout = "fr";
         options = "eurosign:e";
       };
-
-      displayManager.gdm.enable = true;
     };
 
+    displayManager = {
+      sddm = {
+        enable = true;
+        package = lib.mkForce pkgs.kdePackages.sddm; # KDE 6 instead of 5
+      };
+      defaultSession = "plasmax11";
+    };
     desktopManager.plasma6.enable = true;
 
     pipewire = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
+
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
       pulse.enable = true;
     };
   };
