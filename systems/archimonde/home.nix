@@ -3,6 +3,7 @@
 {
   home.packages = with pkgsUnstable; [
     jetbrains.idea-ultimate
+    nodejs_22
   ];
 
   programs.alacritty.settings.window = {

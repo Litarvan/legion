@@ -43,6 +43,11 @@
     vim.defaultEditor = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    roboto
+    noto-fonts-emoji-blob-bin
+  ];
+
   systemd.user.services = {
     i3 = {
       description = "i3 window manager";

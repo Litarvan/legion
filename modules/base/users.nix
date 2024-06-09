@@ -39,10 +39,12 @@
         fish = {
           enable = true;
           interactiveShellInit = ''
-            clear
-            echo
-            ${lib.getExe pkgs.neofetch}
-            echo
+            if [ ! -n $SHLVL ] || [ $SHLVL -le 1 ]
+              clear
+              echo
+              ${lib.getExe pkgs.neofetch}
+              echo
+            end
 
             ${lib.getExe pkgs.starship} init fish | source
           '';
