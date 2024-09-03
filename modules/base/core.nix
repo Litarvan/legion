@@ -3,7 +3,7 @@
 {
   boot = {
     # TODO: Put back _latest when https://github.com/NixOS/nixpkgs/pull/311362 is merged and backported
-    kernelPackages = pkgs.linuxPackages_6_8;
+    kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
 
     loader = {
