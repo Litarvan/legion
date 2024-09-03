@@ -34,6 +34,10 @@
             criteria.title = "plasmashell";
             command = "floating enable; border none";
           }
+          {
+            criteria.urgent = "latest";
+            command = "focus";
+          }
         ];
       };
 

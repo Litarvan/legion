@@ -7,6 +7,7 @@
   };
 
   services = {
+    avahi.enable = true; # Chromecast support
     printing.enable = true;
 
     xserver = {
@@ -36,6 +37,10 @@
       };
       pulse.enable = true;
     };
+
+    udev.packages = with pkgs; [
+      via
+    ];
   };
 
   programs = {
@@ -46,6 +51,8 @@
   environment.systemPackages = with pkgs; [
     roboto
     noto-fonts-emoji-blob-bin
+    via
+    kdePackages.sddm-kcm 
   ];
 
   systemd.user.services = {

@@ -3,14 +3,20 @@
 {
   home.packages = (with pkgs; [
     # CLIs
+    bat
+    delta
     file
     findutils
     htop
     imagemagick
+    jq
+    lm_sensors
     lz4
     nixpkgs-fmt
+    nodejs_22
     p7zip
     patchelf
+    rustup
     unrar
     unzip
     zip
@@ -26,6 +32,7 @@
     krita
     slack
     spotify
+    wireshark
 
     # Themes
     arc-kde-theme
