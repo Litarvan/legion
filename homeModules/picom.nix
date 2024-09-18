@@ -20,7 +20,6 @@
     menuOpacity = 0.8;
 
     backend = "glx";
-    vSync = true;
 
     settings = {
       shadow-radius = 7;
