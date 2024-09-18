@@ -10,6 +10,10 @@
 
   legion = {
     cpu.intel.enable = true;
+    gpu.nvidia = {
+      enable = true;
+      laptop = true;
+    };
     nvme.enable = true;
     bluetooth.enable = true;
     touchpad.enable = true;
@@ -17,7 +21,7 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "xhci_pci" ];
+      availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
 
       luks.devices.sargeras_crypt = {
         device = "/dev/disk/by-label/sargeras_crypt";
@@ -48,5 +52,5 @@
 
   nix.settings.max-jobs = 12;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

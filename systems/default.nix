@@ -27,6 +27,7 @@ let
             registry = mapAttrs (_: input: { flake = input; }) registry;
           };
           nixpkgs = {
+            hostPlatform = system;
             pkgs = pkgsSets.pkgs.${system};
             overlays = attrValues inputs.self.overlays;
           };

@@ -13,6 +13,7 @@
 
     gpu = {
       amd = import ./hardware/gpu/amd.nix;
+      nvidia = import ./hardware/gpu/nvidia.nix;
     };
 
     bluetooth = import ./hardware/bluetooth.nix;
