@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.legion.gpu.nvidia.enable {
     # NVIDIA does not support the latest kernel
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10;
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
 
     hardware.nvidia = lib.mkMerge [
       {
