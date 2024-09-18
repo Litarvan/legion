@@ -11,8 +11,8 @@
   };
 
   config = lib.mkIf config.legion.gpu.nvidia.enable {
-    # NVIDIA does not support the latest kernel, this one is slightly behind and include nice patches
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest;
+    # NVIDIA does not support the latest kernel
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_9;
 
     hardware.nvidia = lib.mkMerge [
       {
