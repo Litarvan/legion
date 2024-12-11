@@ -1,8 +1,8 @@
-{ lib, pkgs, ... }:
+{ lib, isDarwin, ... }:
 
 {
   programs.alacritty = {
-    enable = true;
+    enable = !isDarwin;
 
     settings = {
       window = {

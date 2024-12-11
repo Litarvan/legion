@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, root, ... }:
+{ pkgs, root, isDarwin, ... }:
 
 {
   programs = {
@@ -14,8 +14,10 @@
           end
         '';
       };
-      shellAbbrs.legion-rebuild = "sudo nixos-rebuild -L --show-trace --flake ~/legion";
+      shellAbbrs.legion-rebuild = "${if isDarwin then "darwin-rebuild" else "sudo nixos-rebuild"} -L --show-trace --flake ~/legion";
     };
+
+    starship.enable = isDarwin; # On NixOS, it's enabled system-wide
 
     direnv = {
       enable = true;
@@ -44,6 +46,6 @@
     enable = true;
 
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentryPackage = if isDarwin then pkgs.pinentry_mac else pkgs.pinentry-qt;
   };
 }

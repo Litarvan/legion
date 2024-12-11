@@ -1,24 +1,30 @@
-{ config, lib, pkgs, root, ... }:
+{ config, lib, pkgs, root, isDarwin, ... }:
 
 {
+  nix = {
+    package = pkgs.nixVersions.latest;
+    settings.extra-experimental-features = [ "flakes" "nix-command" ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+  ];
+
+  programs = {
+    fish.enable = true;
+    vim.enable = true;
+    # Starship? Vim default editor?
+  };
+
   users.users = {
     root.shell = pkgs.fish;
 
     litarvan = {
       description = "Adrien Navratil";
-      isNormalUser = true;
-      extraGroups = [ "wheel" ]
-        ++ lib.optionals (config.virtualisation.virtualbox.host.enable) [ "vboxusers" ]
-        ++ lib.optionals (config.virtualisation.docker.enable) [ "docker" ];
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = [ (builtins.readFile (root + /statics/litarvan.ed25519.pub.ssh)) ];
     };
-  };
-
-  programs = {
-    fish.enable = true;
-    starship.enable = true;
-    command-not-found.enable = false;
   };
 
   home-manager = {
@@ -28,7 +34,7 @@
     users.litarvan = {
       home = {
         username = "litarvan";
-        homeDirectory = "/home/litarvan";
+        homeDirectory = lib.mkForce (if isDarwin then "/Users/litarvan" else "/home/litarvan");
 
         stateVersion = lib.mkDefault config.system.stateVersion;
       };

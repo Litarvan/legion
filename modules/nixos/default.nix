@@ -1,9 +1,8 @@
 {
-  base = {
-    core = import ./base/core.nix;
-    graphical = import ./base/graphical.nix;
-    users = import ./base/users.nix;
-  };
+  systemsCommon = import ../systemsCommon.nix;
+
+  core = import ./core.nix;
+  graphical = import ./graphical.nix;
 
   hardware = {
     cpu = {

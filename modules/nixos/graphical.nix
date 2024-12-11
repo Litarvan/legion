@@ -1,10 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  hardware.graphics.enable32Bit = true;
 
   services = {
     avahi.enable = true; # Chromecast support
@@ -43,10 +40,7 @@
     ];
   };
 
-  programs = {
-    dconf.enable = true;
-    vim.defaultEditor = true;
-  };
+  programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
     roboto

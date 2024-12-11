@@ -1,8 +1,7 @@
-{ lib, modulesPath, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   boot = {
-    # TODO: Put back _latest when https://github.com/NixOS/nixpkgs/pull/311362 is merged and backported
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
 
@@ -45,16 +44,22 @@
       "1.0.0.1"
     ];
   };
+  
+  programs = {
+    starship.enable = true;
+    command-not-found.enable = false;
+    vim.defaultEditor = true;
+  };
 
   security = {
     protectKernelImage = true;
     rtkit.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ vim git curl ];
-
-  nix = {
-    package = pkgs.nixVersions.latest;
-    settings.extra-experimental-features = [ "flakes" "nix-command" ];
+  users.users.litarvan = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]
+      ++ lib.optionals (config.virtualisation.virtualbox.host.enable) [ "vboxusers" ]
+      ++ lib.optionals (config.virtualisation.docker.enable) [ "docker" ];
   };
 }

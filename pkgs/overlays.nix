@@ -1,4 +1,4 @@
-{ lib }:
+{ ... }:
 
 builtins.mapAttrs
   (name: path: final: prev: {

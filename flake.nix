@@ -2,14 +2,19 @@
   description = "Litarvan's desktops configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    flake-utils.url = "github:numtide/flake-utils";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-utils.url = "github:numtide/flake-utils";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +40,11 @@
         pkgs = nixpkgs;
         pkgsUnstable = nixpkgsUnstable;
       };
+
+      systems =import ./systems {
+        inherit inputs lib pkgsSets;
+        root = ./.;
+      } ;
     in
     (flake-utils.lib.eachDefaultSystem (system:
       let
@@ -52,13 +62,13 @@
 
       overlays = import ./pkgs/overlays.nix { inherit lib; };
 
-      nixosModules = import ./modules;
-      nixosConfigurations = import ./systems {
-        inherit inputs lib pkgsSets;
-        root = ./.;
-      };
+      nixosModules = import ./modules/nixos;
+      nixosConfigurations = lib.attrsets.filterAttrs (name: system: !system._module.specialArgs.isDarwin) systems; # A bit sus
 
-      homeManagerModules = import ./homeModules;
+      darwinModules = import ./modules/darwin;
+      darwinConfigurations = lib.attrsets.filterAttrs (name: system: system._module.specialArgs.isDarwin) systems;
+
+      homeManagerModules = import ./modules/home;
       # TODO: Home configurations
     };
 }

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 
 {
   imports = [
@@ -8,49 +8,14 @@
     ])
   ];
 
-  legion = {
-    cpu.intel.enable = true;
-    gpu.nvidia = {
-      enable = true;
-      laptop = true;
-    };
-    nvme.enable = true;
-    bluetooth.enable = true;
-    touchpad.enable = true;
-  };
+  # networking.hostName = "sargeras";
 
-  boot = {
-    initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  # services.postgresql.enable = true;
+  # virtualisation.docker.enable = true;
 
-      luks.devices.sargeras_crypt = {
-        device = "/dev/disk/by-label/sargeras_crypt";
-        preLVM = true;
-        allowDiscards = true;
-      };
-    };
+  # defaults write -g ApplePressAndHoldEnabled -bool false
 
-    kernelModules = [ "dm-mod" "dm-crypt" "hid-apple" ];
-  };
+  nix.settings.max-jobs = 10;
 
-  fileSystems = {
-    "/" = {
-      label = "sargeras_root";
-      fsType = "ext4";
-    };
-
-    "/efi" = {
-      label = "SGRS_EFI";
-      fsType = "vfat";
-    };
-  };
-
-  networking.hostName = "sargeras";
-
-  services.postgresql.enable = true;
-  virtualisation.docker.enable = true;
-
-  nix.settings.max-jobs = 12;
-
-  system.stateVersion = "24.05";
+  system.stateVersion = 5;
 }

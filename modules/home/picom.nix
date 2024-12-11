@@ -1,8 +1,8 @@
-{ ... }:
+{ isDarwin, ... }:
 
 {
   services.picom = {
-    enable = true;
+    enable = !isDarwin;
 
     fade = true;
     fadeDelta = 3;

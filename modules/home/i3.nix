@@ -1,4 +1,4 @@
-{ config, pkgs, lib, root, ... }:
+{ config, pkgs, lib, isDarwin, ... }:
 
 {
   options.legion.wallpapers = lib.mkOption {
@@ -7,7 +7,7 @@
   };
 
   config.xsession.windowManager.i3 = {
-    enable = true;
+    enable = !isDarwin;
     package = pkgs.i3-gaps;
 
     config = rec {
