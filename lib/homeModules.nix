@@ -1,6 +1,7 @@
 modules:
 
-{ config, ... } @ args:
+# It seems that '...' does not catch some of the default arguments, and we have to explicitly require them (such as 'pkgs')
+{ config, pkgs, ... } @ args:
 
 {
   imports = map

@@ -7,14 +7,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    vim
     git
   ];
 
   programs = {
     fish.enable = true;
     vim.enable = true;
-    # Starship? Vim default editor?
   };
 
   users.users = {
@@ -52,7 +50,7 @@
               echo
             end
 
-            ${lib.getExe pkgs.starship} init fish | source
+            ${lib.getExe pkgs.starship} init fish | source # On NixOS this may be a duplicate of nixos/core.nix programs.starship.enable = true; option
           '';
         };
       };

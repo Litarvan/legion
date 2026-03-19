@@ -18,13 +18,15 @@ let
         path
 
         (if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager)
-        (if isDarwin then inputs.nix-index-database.darwinModules.nix-index else inputs.nix-index-database.darwinModules.nix-index)
+        (if isDarwin then inputs.nix-index-database.darwinModules.nix-index else inputs.nix-index-database.nixosModules.nix-index)
 
-        (lib.legion.homeModules (flattenModules inputs.self.homeManagerModules))
+        (lib.legion.homeModules ([
+          (import inputs.nix-index-database.homeModules.default)
+        ] ++ (flattenModules inputs.self.homeManagerModules)))
 
         {
           nix = {
-            nixPath = (mapAttrsToList (name: input: "${name}=${input}") inputs) ++ [ "nixos=${inputs.nixpkgs}" ];
+            nixPath = (mapAttrsToList (name: input: "${name}=${input}") inputs) ++ (if isDarwin then [ "nixos=${inputs.nixpkgs}" ] else [ "darwin=${inputs.nix-darwin}" ]);
             registry = mapAttrs (_: input: { flake = input; }) registry;
           };
           nixpkgs = {
@@ -37,7 +39,7 @@ let
         }
       ] ++ (flattenModules (if isDarwin then inputs.self.darwinModules else inputs.self.nixosModules));
 
-      specialArgs = { inherit root lib isDarwin; } // (mapAttrs (_: set: set.${system}) pkgsSets);
+      specialArgs = { inherit root lib isDarwin; } // (filterAttrs (name: _: name != "pkgs") (mapAttrs (_: set: set.${system}) pkgsSets));
     };
 in
 {

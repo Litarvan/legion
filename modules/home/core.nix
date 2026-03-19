@@ -1,7 +1,26 @@
 { pkgs, root, isDarwin, ... }:
 
 {
+  home.sessionPath = [ "$HOME/.npm/prefix/bin" ];
+
   programs = {
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+
+      options = {
+        navigate = true;
+        dark = true;
+        side-by-side = true;
+        line-numbers = true;
+      };
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     fish = {
       shellInit = ''
         fish_vi_key_bindings
@@ -14,14 +33,25 @@
           end
         '';
       };
-      shellAbbrs.legion-rebuild = "${if isDarwin then "darwin-rebuild" else "sudo nixos-rebuild"} -L --show-trace --flake ~/legion";
+      shellAbbrs.legion-rebuild = "sudo ${if isDarwin then "nix run ~/legion#darwin-rebuild --" else "nixos-rebuild"} -L --show-trace --flake ~/legion";
     };
 
-    starship.enable = isDarwin; # On NixOS, it's enabled system-wide
-
-    direnv = {
+    git = {
       enable = true;
-      nix-direnv.enable = true;
+
+      settings = {
+        merge.conflictstyle = "diff3";
+        user = {
+          name = "Adrien Navratil";
+          email = "id" + "@" + "litarvan.com";
+        };
+      };
+
+      # Key expired; commenting until migrating to the new one
+      # signing = {
+      #   key = "056C26AAB0E33515";
+      #   signByDefault = true;
+      # };
     };
 
     gpg = {
@@ -29,23 +59,15 @@
       publicKeys = [{ source = root + /statics/litarvan.pub.gpg; }];
     };
 
-    git = {
-      enable = true;
+    nix-index.enable = true;
 
-      userName = "Adrien Navratil";
-      userEmail = "id" + "@" + "litarvan.com";
-
-      signing = {
-        key = "056C26AAB0E33515";
-        signByDefault = true;
-      };
-    };
+    starship.enable = isDarwin; # On NixOS, it's enabled system-wide
   };
 
   services.gpg-agent = {
     enable = true;
 
     enableSshSupport = true;
-    pinentryPackage = if isDarwin then pkgs.pinentry_mac else pkgs.pinentry-qt;
+    pinentry.package = if isDarwin then pkgs.pinentry_mac else pkgs.pinentry-qt;
   };
 }

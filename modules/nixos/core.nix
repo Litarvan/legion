@@ -48,7 +48,7 @@
   programs = {
     starship.enable = true;
     command-not-found.enable = false;
-    vim.defaultEditor = true;
+    vim.defaultEditor = true; # Rest of the vim config is in ../systemsCommon.nix, but this option is NixOS only (nix-darwin does it by default)
   };
 
   security = {
