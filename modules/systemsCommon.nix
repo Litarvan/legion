@@ -46,7 +46,7 @@
             if [ ! -n $SHLVL ] || [ $SHLVL -le 1 ]
               clear
               echo
-              ${lib.getExe pkgs.neofetch}
+              ${lib.getExe pkgs.fastfetch}
               echo
             end
 
